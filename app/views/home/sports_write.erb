@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<link rel="stylesheet" href="css/reset.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mo-inha</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="css1/bootstrap1.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css1/modern-business.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="css/style.css">
+      <style>
+          .form-group{ margin :0; }
+          .form-group label { font-weight: 300; }
+          .form-group:after { content:''; margin: 0 auto; clear:both; }
+          .row div { margin: 0; display: inline; margin-bottom: 1%; }
+          .logo { line-height: 1.5;}
+      </style>
+</head>
+<body>
+        <script>
+// This example adds a search box to a map, using the Google Place Autocomplete
+// feature. People can enter geographical searches. The search box will return a
+// pick list containing a mix of places and predicted search terms.
+
+function initAutocomplete() {
+var markers= [];
+var map= new google.maps.Map(document.getElementById('map'), {
+center: {lat: 37.449417, lng: 126.654418}, //37.449417, 126.654418 인하대본관
+zoom: 16,
+mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+
+  // Create the search box and link it to the UI element.
+var input= document.getElementById('pac-input');
+var searchBox= new google.maps.places.SearchBox(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  // Bias the SearchBox results towards current map's viewport.
+  map.addListener('bounds_changed', function() {
+    searchBox.setBounds(map.getBounds());
+  });
+
+  map.addListener('dblclick', function(e) {
+      markers.forEach(function(marker) {
+       marker.setMap(null);
+      });
+    placeMarkerAndPanTo(e.latLng, map);
+    document.getElementById('comment').value = e.latLng;
+    //e.lat 위도 e.lng 경도
+  
+    
+  });
+  
+  
+  function placeMarkerAndPanTo(latLng, map) {
+    markers.push(new google.maps.Marker({
+position: latLng,
+map: map
+
+  }));
+}
+
+
+  
+  // [START region_getplaces]
+  // Listen for the event fired when the user selects a prediction and retrieve
+  // more details for that place.
+  searchBox.addListener('places_changed', function() {
+var places= searchBox.getPlaces();
+
+if (places.length== 0) {
+      return;
+    }
+
+    // Clear out the old markers.
+    markers.forEach(function(marker) {
+      marker.setMap(null);
+    });
+markers= [];
+
+    // For each place, get the icon, name and location.
+var bounds= new google.maps.LatLngBounds();
+    places.forEach(function(place) {
+var icon= {
+url: place.icon,
+size: new google.maps.Size(71, 71),
+origin: new google.maps.Point(0, 0),
+anchor: new google.maps.Point(17, 34),
+scaledSize: new google.maps.Size(25, 25)
+      };
+
+      // Create a marker for each place.
+      markers.push(new google.maps.Marker({
+map: map,
+icon: icon,
+title: place.name,
+position: place.geometry.location
+      }));
+
+      if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+    map.fitBounds(bounds);
+  });
+  // [END region_getplaces]
+}
+
+
+    </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGWIiYD_joOkpZe_dCs-aSbDFbeVaC90s&libraries=places&callback=initAutocomplete"
+         async defer></script>
+    <!-- Navigation -->
+       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+                <a class="logo" href="/">MOINHA</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                   	<li><a href="/sports">운동</a></li>
+					<li><a href="/game">다른 모임</a></li>
+					<li><a href="/circle">동아리 홍보</a></li>
+					<li><a href="/theater">공연/전시</a></li>
+					<li><a href="/facility">시설정보</a></li>
+                    <li><a href="/reading">모인하 톡</a></li>
+					
+                    <!--<li><a href="/reading">기타 모임</a></li>-->
+					
+                    		<li>
+        						<!--<a class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">-->
+        						   <!--<a href="/users/sign_in"><%=@login%></a>-->
+        						   <!--<a href="/users/sign_out">로그아웃</a>-->
+        						<!--</a>-->
+        						<% if @login=="로그아웃" %>
+        						<a href="/models/sign_out">로그아웃</a>
+        						<% end %>
+        						<% if @login=="로그인" %>
+        						<a href="/models/sign_in">로그인</a>
+        						<% end %>
+        					</li>
+        					<li>
+        						<!--<a href="/users/sign_up">회원가입</a>-->
+        						<% if @login=="로그인" %>
+         						<a href="/before_signup">회원가입</a>
+         						<% end %>
+        					</li>
+                       
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+<!-- Page Content -->
+    <div class="write_section_container">
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="write-page-header">모집글쓰기</h1>
+                <span class="write_btn"><a href="/sports">목록</a></span>
+            </div>
+        </div>
+        <!-- Projects Row -->
+        <%= @lng %><%= @lat %>
+                <form action="/sports_write_end" method="post" enctype="multipart/form-data">
+                  <div class="row">
+                  <div class="col-md-8 col-sm-4">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">제목</label>
+                    <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="제목">
+                  </div>
+                  </div>
+                  <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">카카오톡 아이디</label>
+                    <input type="text" name="kakao" class="form-control" id="exampleInputEmail1" placeholder="카톡아이디">
+                  </div>
+                  </div>
+                  </div>
+                  
+                  <div class="row">
+                  <div class="col-md-3 col-sm-3">
+                  <div class="form-group">
+                    <label for="exampleInputEmail2">날짜/시간</label>
+                    <input type="text" name="date" class="form-control" id="exampleInputEmail2" placeholder="예)2016.09.01 18:00">
+                  </div>
+                  </div>
+                  <div class="col-md-3 col-sm-3">
+                   <div class="form-group">
+                    <label for="exampleInputEmail2">작성자</label>
+                    <input type="text" name="name" class="form-control" id="exampleInputEmail2" placeholder="홍길동">
+                  </div>
+                  </div>
+                
+                    <input type="hidden" name="current" class="form-control" id="exampleInputEmail2" placeholder="홍길동" value="<%= current_model.email %>">
+   
+                  
+                  <div class="col-md-3 col-sm-3">
+                   <div class="form-group">
+                    <label for="exampleInputEmail2">장소</label>
+                    <input type="text" name="site" class="form-control" id="exampleInputEmail2" placeholder="예)학관 소극장">
+                  </div>
+                  </div>
+                  <div class="col-md-3 col-sm-3">
+                   <div class="form-group">
+                    <label for="exampleInputEmail2">모집인원</label>
+                    <input type="text" name="people_num" class="form-control" id="exampleInputEmail2" placeholder="5">
+                  </div>
+                  </div>
+                  
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">내용</label>
+                    <textarea class="form-control" name="content" rows="5" id="comment"></textarea>
+                  </div>
+                 <p>한 가지 종목을 체크하거나 원하는 사진을 선택하세요. </p>
+                    <label class="checkbox-inline">
+                      <input name ="what_sports" type="checkbox" id="inlineCheckbox1" value="soccer"> 축구
+                    </label>
+                    <label class="checkbox-inline">
+                      <input name="what_sports" type="checkbox" id="inlineCheckbox2" value="swim"> 수영
+                    </label>
+                    <label class="checkbox-inline">
+                      <input name="what_sports" type="checkbox" id="inlineCheckbox3" value="basket"> 농구
+                    </label>
+                     <label class="checkbox-inline">
+                      <input name ="what_sports" type="checkbox" id="inlineCheckbox1" value="bord"> 보드
+                    </label>
+                    <label class="checkbox-inline">
+                      <input name="what_sports" type="checkbox" id="inlineCheckbox2" value="badmin"> 배드민턴
+                    </label>
+                    <label class="checkbox-inline">
+                      <input name="what_sports" type="checkbox" id="inlineCheckbox3" value="catchball"> 캐치볼
+                    </label>
+                          <label class="checkbox-inline">
+                      <input name="what_sports" type="checkbox" id="inlineCheckbox3" value="footsal"> 풋살
+                    </label>
+                     <label class="checkbox-inline">
+                      <input name ="what_sports" type="checkbox" id="inlineCheckbox1" value="pullup"> 철봉
+                    </label>
+                    <label class="checkbox-inline">
+                      <input name="what_sports" type="checkbox" id="inlineCheckbox2" value="jogging"> 조깅
+                    </label>
+                    <label class="checkbox-inline">
+                      <input name="what_sports" type="checkbox" id="inlineCheckbox3" value="running"> 런닝
+                    </label>
+                    <label class="checkbox-inline">
+                      <input name="what_sports" type="checkbox" id="inlineCheckbox3" value="pingpong"> 탁구 or
+                    </label>
+                    <input type="file" name="pic" accept="image/*" style="display:inline; width: 200px; margin-top:10px;">
+                    <button type="submit" class="write_btn" style="color:white; margin:0; margin-top:10px;">전송</button>
+                     <!--<input id="pac-input" class="controls" type="text" placeholder="Search Box" style="width : 200px; height : 30px;">-->
+                     <!--<div class ="map-responsive" id="map"></div>-->
+
+                </form>
+                <!--<%= current_model.email %>-->
+              <!--<% @post.each do |p| %>-->
+              <!--     <%= p.title %>-->
+              <!--     <%= p.current %>-->
+              <!-- <% end %>-->
+               <!--<%= current_model.email %>-->
+        <!--</div>-->
+            </div>
+        <!-- /.row -->
+
+        <!-- Footer -->
+         <!--<footer>-->
+         <!--       <p>Copyright &copy; FRUITS PUNCH_Inha University</p>-->
+         <!--</footer>-->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <!--<script src="js1/jquery.js"></script>-->
+
+    <!-- Bootstrap Core JavaScript -->
+    <!--<script src="js1/bootstrap.min.js"></script>-->
+
+    <!-- Script to Activate the Carousel -->
+    
+   
+</body>
+</html>

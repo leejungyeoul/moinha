@@ -1,0 +1,51 @@
+<head>
+  <style>
+    body {
+      background:url("images/inha-back.jpg");
+      background-repeat: no-repeat;
+      background-size:100%;
+      
+    }
+    .container {
+      width: 30%; margin: 15% auto; background-color: rgba(0,0,0,0.5);
+      border-radius: 10px;
+      padding: 2%;
+      color: white;
+      font-weight: 500;
+    }
+    
+    .container h1 { 
+      font-size: 1.4em; color: lawngreen;
+    }
+    
+    .container p {
+      font-size: 1em; margin-bottom: 30px; 
+    }
+    
+    button { float: right; }
+    
+    label { font-weight: 300;}
+  </style>
+</head>
+<body>
+<div class ="container">
+<h1>정답이 일치하지 않습니다.</h1>
+<p>인하대학교 학생이 맞으신가요? 다시 생각해보시고 답변을 작성해주세요.</p>
+<!--<form>-->
+<!--    <input type="text" name="제목">-->
+<!--    <textarea></textarea>-->
+<!--    <input type"summit" value="전송">-->
+<!--</form>-->
+    <form action="/before_signup2" method="post">
+      <div class="form-group">
+        <label for="exampleInputEmail1">인하대 학생회관 이름은?</label>
+        <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="**프라자">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">6호관 옆 숲이름은?</label>
+        <input type="text" name="title2" class="form-control" id="exampleInputEmail1" placeholder="하***의숲">
+      </div>
+      <button type="submit" class="btn btn-default" style="margin-top:20px;">전송</button>
+      </form>
+</div>
+</body>

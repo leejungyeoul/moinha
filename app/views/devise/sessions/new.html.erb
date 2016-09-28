@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="css/reset.css">
+    
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mo-inha</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/modern-business.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+         body { background: url('http://www.inha.ac.kr/user/plaza/k2board/235757/plaza1467814061774_b_img.jpg'); background-size:100%; background-repeat:no-repeat; }
+        .login_container { background-color:rgba(0,0,0,0.5);  width:450px; height: 230px; padding: 20px; margin: 18% auto; border-radius:10px; }
+        .box { margin: 10% auto; width: 330px; }
+        #model_remember_me:after label {width:350px;}
+        .field { height: 30px; width: 230px; margin-bottom:5px; display:inline-block;}
+        #filed_wrap { width:230px; height: 60px; display:inline-block; }
+        .field:after { content: ''; clear:both; margin: 0 auto;}
+        .field input { width: 160px; height: 25px; border-radius: 5px; margin-bottom: 5px; }
+        .field label { color: white; font-size:0.9em; margin-top:5px; font-weight: 300; width:50px; text-align:right; margin-right: 10px;}
+        .remember_check { width:230px; display:inline-block; position:relative; left:64px;}
+        .remember_check label { color: white; text-align:left; font-weight: 200; font-size: 0.5em; width: 200px; height:10px; }
+        
+        h2 { color: #69ca1b; font-weight: 500; margin-bottom:10px; font-size: 2em; margin:0px; margin-bottom: 15px; width: ; padding: 10px; border-radius:5px; z-index:5;}
+        h2 span { color: #69ca1b; font-size: 0.6em; margin-left: 10px;}
+        em { color: white; font-style:normal; }
+        .actions { width: 100px; height: 60px; float:right; margin:0px; position:relative; top: -70px;}
+        .actions input{ 
+          background-color: #69ca1b; border:none; width:100px; height:60px; 
+          margin:0px; color: white; font-weight: 500; font-size:1.1em; border-radius:3px;
+        }
+        .actions input:active { color: grey; background-color: green;}
+        a { display: none;}
+        #user_remember_me { width:15px; height:15px;}
+        .new_model { line-height: 0px; display:inline-block; height:100px;}
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/" style="color: white">MOINHA</a>
+            </div>
+           
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                   	<li><a href="/sports">운동</a></li>
+					<li><a href="/game">게임</a></li>
+					<li><a href="/reading">독서</a></li>
+					<li><a href="/circle">동아리</a></li>
+					<li><a href="/theater">공연/전시</a></li>
+					<li><a href="/facility">시설정보</a></li>
+                   
+                    		<li>
+        						<!--<a class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">-->
+        						    <a href="/users/sign_in">로그인</a>
+        						<!--</a>-->
+        					</li>
+        					<li>
+        						<a href="/users/sign_up">회원가입</a>
+        					</li>
+                      
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    
+    <!--<br><br><br>-->
+    <div class="login_container">
+            <h2>로그인<span>Log in</span></h2>
+            <div class="box">
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                  <div id="field_wrap" style="width:230px; display:inline-block;">
+                      <div class="field">
+                        <%= f.label :이메일 %>
+                        <%= f.email_field :email, autofocus: true %>
+                      </div>
+                      <br>
+                      <div class="field">
+                        <%= f.label :패스워드 %>
+                        <%= f.password_field :password, autocomplete: "off" %>
+                      </div>
+                  </div>
+                <br>
+                  <% if devise_mapping.rememberable? -%>
+                                                                                <!--<div class="field">-->
+                                                                                <!--  <%= f.check_box :remember_me %>-->
+                                                                                <!--  <%= f.label :입력사항을_기억합니다 %>-->
+                                                                                <!--</div>-->
+                    <div class="remember_check">
+                        <input type="checkbox" name="remember_check"></input>
+                        <label for="remember_check">입력사항을 기억합니다</label>
+                    </div>
+                  <% end -%>
+                
+                  <div class="actions">
+                    <%= f.submit "Log in" %>
+                  </div>
+                 
+                <% end %>
+                
+                <%= render "devise/shared/links" %>
+            </div>
+        </div>
+        
+        <!-------------------------------------------------------------------CHEOLHUN'S LOGIN FORM----------------------------------->
+        
+            <!--<div class="loginForm">-->
+            <!--    <form method="post" name="" action="">-->
+            <!--       <div class="box">-->
+            <!--            <input type="text" class="iText" placeholder="이메일">-->
+            <!--            <br>-->
+            <!--            <input type="password" name="" id="" class="iText" placeholder="비밀번호">-->
+            <!--            <br>-->
+            <!--            <p>-->
+            <!--              <span class="fleft"><input type="checkbox" id=""><label for="">아이디 저장</label></span> -->
+            <!--              <span class="fright"><a href="">아이디 찾기</a>&nbsp;|&nbsp;<a href="">비밀번호 찾기</a></span>-->
+            <!--            </p>-->
+            <!--      </div>-->
+            <!--      <a href="#" id="" class="loginBtn">로그인</a>-->
+            <!--    </form>-->
+            <!--</div>-->
+        
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+    
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+    
+        <!-- Script to Activate the Carousel -->
+        <script>
+         $('.carousel').carousel({
+              interval: 3000 //changes the speed
+         })
+        </script>
+    </body>
+</html>

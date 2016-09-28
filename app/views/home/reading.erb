@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+	<link rel="stylesheet" href="css1/reset.css">
+    <link rel="stylesheet" href="css1/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	
+	<title>Mo-inha</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css1/bootstrap1.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css1/modern-business.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">MOINHA</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                   	<li><a href="/sports">운동</a></li>
+					<li><a href="/game">게임</a></li>
+					<li><a href="/reading" style="color: white">독서</a></li>
+					<li><a href="/circle">동아리</a></li>
+					<li><a href="/theater">공연/전시</a></li>
+					<li><a href="/facility">시설정보</a></li>
+                   
+                    		<li>
+        						<a class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">로그인</a>
+        					</li>
+        					<li>
+        						<a href="#">회원가입</a>
+        					</li>
+                      
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+<!--헤더 슬라이더-->
+    <!-- Header Carousel -->
+  
+
+
+
+
+
+
+<!--첫번째 슬라이드-->
+    <!-- Page Content -->
+    <hr>
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">독서
+                    <small>모임 일정/장소</small>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary">최신순</button>
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">참여율순</a></li>
+                        
+                      </ul>
+                    </div>
+                    <span style="float: right;"><button type="button" class="btn btn-primary btn-sm">
+                        <a href="/reading_write"><font color="white">글쓰기</font></a></button></span>
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Projects Row -->
+        <div class="row">
+            <% @pictures.each do |p| %>
+            <div class="col-md-3 col-sm-5 portfolio-item">
+                
+                  
+                   <!--<div class="col-lg-3 col-md-4 col-xs-6 thumb">-->
+                        <a href="#">
+                           
+                               <% if p.id <= @pictures.length and p.id > @pictures.length - 4 %>
+                               <% unless p.image_url.nil? %>
+                                      <img class="img-responsive" src="<%= p.image_url %>" alt="" style="width: auto; height:auto;" style="cursor: pointer;" onclick="doImgPop('<%= p.image_url %>')" " />
+                               <% end %>
+                          
+                        </a>
+                        <h4>
+                        <a href="#"><%= p.title %></a>
+                        </h4>
+                        <p>날짜:<%= p.date %><br>
+                        장소:<%= p.site %><br>
+                        글쓴이 : <%= p.user %>  </p>
+                              <% end %>
+                              <a href="/destroy_reading/<%=p.id%>">[삭제]</a>
+                     <!-- <font color="#614f4f">-->
+                     <!--    <div align="center"><span style="font-weight:bold;"> <%= p.title %> </span>-->
+                     <!--    <%= p.user %><%= p.site %><%= p.content %><%= p.date %></div>-->
+                     <!--          <a href="/destroy1/<%=p.id%>">[삭제]</div></a>-->
+                     <!--</font>-->
+                
+            </div>
+            <% end %>
+            
+        </div>
+        <!-- /.row -->
+        
+        
+        
+                <div class="row">
+            <% @pictures.each do |p| %>
+            <div class="col-md-3 col-sm-5 portfolio-item">
+                
+                        <a href="#">
+                           
+                               <% if p.id <= @pictures.length - 4 and p.id > @pictures.length - 8 %>
+                               <% unless p.image_url.nil? %>
+                                      <img class="img-responsive" src="<%= p.image_url %>" alt="" style="width: auto; height:auto;" style="cursor: pointer;" onclick="doImgPop('<%= p.image_url %>')" " />
+                               <% end %>
+                          
+                        </a>
+                        <h4>
+                        <a href="#"><%= p.title %></a>
+                        </h4>
+                        <p>날짜:<%= p.date %><br>
+                        장소:<%= p.site %><br>
+                        글쓴이 : <%= p.user %>  </p>
+                              <% end %>
+                     <!-- <font color="#614f4f">-->
+                     <!--    <div align="center"><span style="font-weight:bold;"> <%= p.title %> </span>-->
+                     <!--    <%= p.user %><%= p.site %><%= p.content %><%= p.date %></div>-->
+                     <!--          <a href="/destroy1/<%=p.id%>">[삭제]</div></a>-->
+                     <!--</font>-->
+                
+            </div>
+            <% end %>
+            
+        </div>
+        <!-- /.row -->
+        
+        
+        
+                <div class="row">
+            <% @pictures.each do |p| %>
+            <div class="col-md-3 col-sm-5 portfolio-item">
+            
+                        <a href="#">
+                           
+                               <% if p.id <= @pictures.length - 8 and p.id > @pictures.length - 12 %>
+                               <% unless p.image_url.nil? %>
+                                      <img class="img-responsive" src="<%= p.image_url %>" alt="" style="width: auto; height:auto;" style="cursor: pointer;" onclick="doImgPop('<%= p.image_url %>')" " />
+                               <% end %>
+                          
+                        </a>
+                        <h4>
+                        <a href="#"><%= p.title %></a>
+                        </h4>
+                        <p>날짜:<%= p.date %><br>
+                        장소:<%= p.site %><br>
+                        글쓴이 : <%= p.user %>  </p>
+                              <% end %>
+                     <!-- <font color="#614f4f">-->
+                     <!--    <div align="center"><span style="font-weight:bold;"> <%= p.title %> </span>-->
+                     <!--    <%= p.user %><%= p.site %><%= p.content %><%= p.date %></div>-->
+                     <!--          <a href="/destroy1/<%=p.id%>">[삭제]</div></a>-->
+                     <!--</font>-->
+                
+            </div>
+            <% end %>
+            
+        </div>
+        <!-- /.row -->
+        
+        
+        
+        
+                <div class="row">
+            <% @pictures.each do |p| %>
+            <div class="col-md-3 col-sm-5 portfolio-item">
+                
+                  
+                        <a href="#">
+                           
+                               <% if p.id <= @pictures.length - 12 and p.id > @pictures.length - 16 %>
+                               <% unless p.image_url.nil? %>
+                                      <img class="img-responsive" src="<%= p.image_url %>" alt="" style="width: auto; height:auto;" style="cursor: pointer;" onclick="doImgPop('<%= p.image_url %>')" " />
+                               <% end %>
+                          
+                        </a>
+                        <h4>
+                        <a href="#"><%= p.title %></a>
+                        </h4>
+                        <p>날짜:<%= p.date %><br>
+                        장소:<%= p.site %><br>
+                        글쓴이 : <%= p.user %>  </p>
+                              <% end %>
+                     <!-- <font color="#614f4f">-->
+                     <!--    <div align="center"><span style="font-weight:bold;"> <%= p.title %> </span>-->
+                     <!--    <%= p.user %><%= p.site %><%= p.content %><%= p.date %></div>-->
+                     <!--          <a href="/destroy1/<%=p.id%>">[삭제]</div></a>-->
+                     <!--</font>-->
+                
+            </div>
+            <% end %>
+            
+        </div>
+        <!-- /.row -->
+        
+
+        <hr>
+
+        <!-- Pagination -->
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                    <li>
+                        <a href="#">&laquo;</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">1</a>
+                    </li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <a href="#">4</a>
+                    </li>
+                    <li>
+                        <a href="#">5</a>
+                    </li>
+                    <li>
+                        <a href="#">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; FRUITS PUNCH_Inha Unversity</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <!--<script src="js1/jquery.js"></script>-->
+
+    <!-- Bootstrap Core JavaScript -->
+    <!--<script src="js1/bootstrap.min.js"></script>-->
+
+     <!--Script to Activate the Carousel -->
+    
+     <script>
+    // $('.carousel').carousel({
+    //     interval: 15000 //changes the speed
+    // })
+     </script>
+    
+    
+
+</body>
+<style>
+    body {
+    background-color: #cc9898;
+    }
+    
+</style>
+
+
+
+</html>

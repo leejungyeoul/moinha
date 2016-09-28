@@ -1,0 +1,128 @@
+<html>
+   <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+	<link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mo-inha</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/modern-business.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        	<meta charset="euc-kr">
+        	<title>구글맵 API 활용하기</title>
+        	
+</head>
+  <body style=" background-color: #f9f9f9;">
+<script>
+function initAutocomplete() {
+var map= new google.maps.Map(document.getElementById('footmap'), {
+center: {lat: 37.449417, lng: 126.654418}, //37.449417, 126.654418 인하대본관
+zoom: 16,
+mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+var myLatLng= {lat: 37.449795, lng: 126.651506};
+ var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    
+  });
+
+  // Bias the SearchBox results towards current map's viewport.
+  map.addListener('bounds_changed', function() {
+    searchBox.setBounds(map.getBounds());
+  });
+
+  map.addListener('dblclick', function(e) {
+       var point = new GLatLng(37.450275, 126.651410); 
+     map.addOverlay(new GMarker(point));
+
+  });
+  
+  
+  function placeMarkerAndPanTo(latLng, map) {
+    markers.push(new google.maps.Marker({
+position: latLng,
+map: map
+
+  }));
+}
+
+
+  
+  // [START region_getplaces]
+  // Listen for the event fired when the user selects a prediction and retrieve
+  // more details for that place.
+  searchBox.addListener('places_changed', function() {
+var places= searchBox.getPlaces();
+
+if (places.length== 0) {
+      return;
+    }
+
+    // Clear out the old markers.
+    markers.forEach(function(marker) {
+      marker.setMap(null);
+    });
+markers= [];
+
+    // For each place, get the icon, name and location.
+var bounds= new google.maps.LatLngBounds();
+    places.forEach(function(place) {
+var icon= {
+url: place.icon,
+size: new google.maps.Size(71, 71),
+origin: new google.maps.Point(0, 0),
+anchor: new google.maps.Point(17, 34),
+scaledSize: new google.maps.Size(25, 25)
+      };
+
+      // Create a marker for each place.
+      markers.push(new google.maps.Marker({
+map: map,
+icon: icon,
+title: place.name,
+position: place.geometry.location
+      }));
+
+      if (place.geometry.viewport) {
+        // Only geocodes have viewport.
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+    map.fitBounds(bounds);
+  });
+  // [END region_getplaces]
+}
+
+
+    </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGWIiYD_joOkpZe_dCs-aSbDFbeVaC90s&libraries=places&callback=initAutocomplete"
+         async defer></script>
+           <div class="col-sm-5 col-md-5"> <div class="alert alert-danger"> <img src="http://postfiles14.naver.net/20160924_13/hynglug_1474714574809uqhBw_JPEG/bigsoccer.jpg?type=w3" class="fac_image"></div></div>
+              <div class="col-sm-6 col-md-6"><div class="alert alert-danger"><div class ="facility-map-responsive" id="footmap"></div></div></div>
+ 
+</html>
+       

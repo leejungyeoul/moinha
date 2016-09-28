@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Showing pixel and tile coordinates</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+function initMap() {
+  var chicago = new google.maps.LatLng(37.449891, 126.653137);
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: chicago,
+    zoom: 16
+  });
+
+  var coordInfoWindow = new google.maps.InfoWindow();
+  coordInfoWindow.setContent(createInfoWindowContent(chicago, map.getZoom()));
+  coordInfoWindow.setPosition(chicago);
+  coordInfoWindow.open(map);
+
+  map.addListener('zoom_changed', function() {
+    coordInfoWindow.setContent(createInfoWindowContent(chicago, map.getZoom()));
+    coordInfoWindow.open(map);
+  });
+}
+
+var TILE_SIZE = 256;
+
+function createInfoWindowContent(latLng, zoom) {
+  var scale = 1 << zoom;
+
+  var worldCoordinate = project(latLng);
+
+  var pixelCoordinate = new google.maps.Point(
+      Math.floor(worldCoordinate.x * scale),
+      Math.floor(worldCoordinate.y * scale));
+
+  var tileCoordinate = new google.maps.Point(
+      Math.floor(worldCoordinate.x * scale / TILE_SIZE),
+      Math.floor(worldCoordinate.y * scale / TILE_SIZE));
+
+  return [
+    'Chicago, IL',
+    'LatLng: ' + latLng,
+    'Zoom level: ' + zoom,
+    'World Coordinate: ' + worldCoordinate,
+    'Pixel Coordinate: ' + pixelCoordinate,
+    'Tile Coordinate: ' + tileCoordinate
+  ].join('<br>');
+}
+
+// The mapping between latitude, longitude and pixels is defined by the web
+// mercator projection.
+function project(latLng) {
+  var siny = Math.sin(latLng.lat() * Math.PI / 180);
+
+  // Truncating to 0.9999 effectively limits latitude to 89.189. This is
+  // about a third of a tile past the edge of the world tile.
+  siny = Math.min(Math.max(siny, -0.9999), 0.9999);
+
+  return new google.maps.Point(
+      TILE_SIZE * (0.5 + latLng.lng() / 360),
+      TILE_SIZE * (0.5 - Math.log((1 + siny) / (1 - siny)) / (4 * Math.PI)));
+}
+
+    </script>
+    <script async defer
+         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApwIOKEeosWl8mTTn5nHsiigGOFNva4Q4&signed_in=true&callback=initMap">
+        
+         
+    </script>
+  </body>
+</html>
+
+       <% @posts.each do |p| %>
+                            <%= p.content %>
+                        <% end %>
+                        
+                                  <% @posts.each do |p| %>
+                          <!--<% if @posts.num == @pictures.id %>-->
+                            <%= p.content %>
+                            
+                            <%= p.num %>
+                         <!--<% end %>-->
+                         <% end %>
+                         
+                         
+                                  <% unless p.id.nil? and @count > 3 %>
+                               <% @count=@count+1 %>
+                               
+                               
+                               <!--<% if p.id <= @pictures.length and p.id > @pictures.length - 4 %>-->
+                               
+                               
+                               
+                <div class="row">
+            <% @pictures.each do |p| %>
+            <div class="col-md-3 col-sm-5 portfolio-item">
+                
+                        <a href="#">
+                           
+                               <% if p.id <= @pictures.length - 4 and p.id > @pictures.length - 8 %>
+                               <% unless p.image_url.nil? %>
+                                      <img class="img-responsive" src="<%= p.image_url %>" alt="" style="width: auto; height:auto;" style="cursor: pointer;" onclick="doImgPop('<%= p.image_url %>')" " />
+                               <% end %>
+                          
+                        </a>
+                        <h4>
+                        <a href="#"><%= p.title %></a>
+                        </h4>
+                        <p>날짜:<%= p.date %><br>
+                        장소:<%= p.site %><br>
+                        글쓴이 : <%= p.name %>  </p>
+                              <% end %>
+                     <!-- <font color="#614f4f">-->
+                     <!--    <div align="center"><span style="font-weight:bold;"> <%= p.title %> </span>-->
+                     <!--    <%= p.name %><%= p.site %><%= p.content %><%= p.date %></div>-->
+                     <!--          <a href="/destroy1/<%=p.id%>">[삭제]</div></a>-->
+                     <!--</font>-->
+                
+            </div>
+            <% end %>
+            
+        </div>
+        <!-- /.row -->
+        
+        
+        
+                <div class="row">
+            <% @pictures.each do |p| %>
+            <div class="col-md-3 col-sm-5 portfolio-item">
+            
+                        <a href="#">
+                           
+                               <% if p.id <= @pictures.length - 8 and p.id > @pictures.length - 12 %>
+                               <% unless p.image_url.nil? %>
+                                      <img class="img-responsive" src="<%= p.image_url %>" alt="" style="width: auto; height:auto;" style="cursor: pointer;" onclick="doImgPop('<%= p.image_url %>')" " />
+                               <% end %>
+                          
+                        </a>
+                        <h4>
+                        <a href="#"><%= p.title %></a>
+                        </h4>
+                        <p>날짜:<%= p.date %><br>
+                        장소:<%= p.site %><br>
+                        글쓴이 : <%= p.name %>  </p>
+                              <% end %>
+                     <!-- <font color="#614f4f">-->
+                     <!--    <div align="center"><span style="font-weight:bold;"> <%= p.title %> </span>-->
+                     <!--    <%= p.name %><%= p.site %><%= p.content %><%= p.date %></div>-->
+                     <!--          <a href="/destroy1/<%=p.id%>">[삭제]</div></a>-->
+                     <!--</font>-->
+                
+            </div>
+            <% end %>
+            
+        </div>
+        <!-- /.row -->
+        
+        
+        
+        
+                <div class="row">
+            <% @pictures.each do |p| %>
+            <div class="col-md-3 col-sm-5 portfolio-item">
+                
+                  
+                        <a href="#">
+                           
+                               <% if p.id <= @pictures.length - 12 and p.id > @pictures.length - 16 %>
+                               <% unless p.image_url.nil? %>
+                                      <img class="img-responsive" src="<%= p.image_url %>" alt="" style="width: auto; height:auto;" style="cursor: pointer;" onclick="doImgPop('<%= p.image_url %>')" " />
+                               <% end %>
+                          
+                        </a>
+                        <h4>
+                        <a href="#"><%= p.title %></a>
+                        </h4>
+                        <p>날짜:<%= p.date %><br>
+                        장소:<%= p.site %><br>
+                        글쓴이 : <%= p.name %>  </p>
+                              <% end %>
+                     <!-- <font color="#614f4f">-->
+                     <!--    <div align="center"><span style="font-weight:bold;"> <%= p.title %> </span>-->
+                     <!--    <%= p.name %><%= p.site %><%= p.content %><%= p.date %></div>-->
+                     <!--          <a href="/destroy1/<%=p.id%>">[삭제]</div></a>-->
+                     <!--</font>-->
+                
+            </div>
+            <% end %>
+            
+        </div>
+        <!-- /.row -->
+        
+        
+                  <!--<%= @peo.apply_current %>-->
+                  <!--<%= @peo.apply_num %>                -->
+                  
+                  
+                   <!--<% @post.each do |t| %>-->
+                                <!--<% @post.each do |r| %>-->
+                                    <!--<% if t.apply_current != r.apply_current %>-->
+                                        <!--<% if r.apply_num == p.id %>-->
+                                            <!--<% @pcount=@pcount+1 %>-->
+                                            <%= @pcount %>
+                                            <!--<%= t.apply_current %>-->
+                                        <!--<% end %>-->
+                                    <!--<% end %>-->
+                                <!--<% end %>-->
+                            <!--<% end %>-->
+                            
+                            
+                            <!--<%= current_model.email %>-->
+                    <% @aply=0 %>
+                         <% @spopeo.each do |p| %>
+                         <!--<%= p.apply_current %>-->
+                             <% if p.apply_current == current_model.email %>
+                              <% @aply=1 %>
+                             <% end %>    
+                         <% end %>
+                         
+                     <% if @hi==0 %>
+                    <button type="submit" class="btn btn-default" style="margin-top:20px;">참가신청</button>
+                     <% end %>
+                     
+                     <% if @hi==1 %>
+                    <button type="submit" class="btn btn-default" style="margin-top:20px;">참가신청취소</button>
+                     <% end %>
+                     
+                     <!--<% if p.apply_num == @pictures.id %>--><!--<% end %>-->
